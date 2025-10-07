@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# pokemon Api endpoint
+URL="https://pokeapi.co/api/v2/pokemon/pikachu"
+
+# the output files
+DATA_FILE="data.json"
+ERROR_FILE="errors.txt"
+
+# fetching the data
+echo "Fetching data for pikachu..."
+curl -s -w "%{http_code}" -o "DATA_FILE" "URL" > status.txt
+
+# reading the status code
+status=$(cat status.txt)
+
+# check if the request is success (200 = ok)
+if [ "$status" -eq 200 ]; then
+ echo "successfully saved data to $DATA_FILE"
+else
+ echo "Failed to fetch data. status code: $status" | tee -a "$ERROR_FILE"
+fi
+
+# cleanup
+rm status.txt
