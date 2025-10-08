@@ -10,5 +10,9 @@ type=$(jq -r '.types[0].type.name' data.json)
 formatted_height=$(awk "BEGIN {print $height/10}")
 formatted_weight=$(awk "BEGIN {print $weight/10}")
 
+#capitalizing first letter
+name=$(echo $name | sed 's/.*/\u&/')
+type=$(echo $type | sed 's/.*/\u&/')
+
 #Output
-echo "$(echo $name | sed 's/.*/\u&/') is of type $(echo $type | sed 's/.*/\u&/'), weighs ${formatted_weight}kg, and is ${formatted_height}m tall."
+echo "$name is of type $type, weighs ${formatted_weight}kg, and is ${formatted_height}m tall."
