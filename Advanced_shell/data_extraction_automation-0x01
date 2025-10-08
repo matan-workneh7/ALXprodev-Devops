@@ -12,4 +12,3 @@ weight_kg=$(awk "BEGIN {print $weight/10}")
 
 #Output
 echo "$(echo $name | sed 's/.*/\u&/') is of type $(echo $type | sed 's/.*/\u&/'), weighs ${weight_kg}kg, and is ${height_m}m tall."
-Pikachu is of type Electric, weighs 6kg, and is 0.4m tall.
