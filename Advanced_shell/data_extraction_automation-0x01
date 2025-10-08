@@ -4,11 +4,11 @@
 name=$(jq -r '.name' data.json)
 height=$(jq -r '.height' data.json)
 weight=$(jq -r '.weight' data.json)
-type=$(jq -r '.type[0].type.name' data.json)
+type=$(jq -r '.types[0].type.name' data.json)
 
 #Adjusting the units 
-height_m=$(awk "BEGIN {PRINT $height/10"})
-weight_m=$(awk "BEGIN {PRINT $weight/10"})
+height_m=$(awk "BEGIN {PRINT $height/10}")
+weight_m=$(awk "BEGIN {PRINT $weight/10}")
 
 #Output
-echo "$(echo $name | sed 's/.*/\u&/') is of type $(echo $type | sed sed 's/.*/\u&/'), weight ${weight_kg}kg, and is ${height_m}m tall. "
+echo "$(echo $name | sed 's/.*/\u&/') is of type $(echo $type | sed 's/.*/\u&/'), weight ${weight_kg}kg, and is ${height_m}m tall. "
