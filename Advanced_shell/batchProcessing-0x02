@@ -2,6 +2,8 @@
 
 pokemons=("bulbasaur" "ivysaur" "venusaur" "charmander" "charmeleon")
 
+mkdir -p pokemon_data
+ 
 for p in "${pokemons[@]}"; do
 	echo "Fetching data for $p..."
 done
