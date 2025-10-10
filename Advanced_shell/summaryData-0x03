@@ -24,3 +24,9 @@ for file in "$DATA_DIR"/*.json; do
 
 	echo "$name_cap,$height_m,$weight_kg" >> "$REPORT_FILE"
 done
+
+#Calculating and Printing the average height and weight
+awk -F',' 'NR>1 {height+=$2; weight+=$3; count++} 
+END {
+  printf "\nAverage Height: %.2f m\nAverage Weight: %.2f kg\n", height/count, weight/count
+}' "$REPORT_FILE"
