@@ -2,3 +2,6 @@
 
 #Well specify where the datas are stored
 DATA_DIR="pokemon_data"
+
+#Report to be created
+REPORT_FILE="pokemon_report.csv"
