@@ -5,3 +5,9 @@ DATA_DIR="pokemon_data"
 
 #Report to be created
 REPORT_FILE="pokemon_report.csv"
+
+echo "CSV Report generated at: $REPORT_FILE"
+
+#Creating the CSV header
+echo "Name,Height (m),Weight (kg)" > "$REPORT_FILE"
+
