@@ -7,20 +7,27 @@ pokemons=("bulbasaur" "ivysaur" "venusaur" "charmander" "charmeleon")
 for p in "${pokemons[@]}"; do
 	echo "Fetching data for $p..."
 
-	success=False
+	success = false
 	
 	for attempt in {1..3}; do
 		status=$(curl -s -w"%{http_code}" -o "pokemon_data/$p.json" "https://pokeapi.co/api/v2/pokemon/$p")
-		if ["$status" -eq 200]; then
-			success=true
+		if [ "$status" -eq 200 ]; then
+			success = true
 			echo "Saved data to pokemon_data/$p.json"
 			break
 		else
 			echo "Attempt $attempt failed with status code $status. Retrying..."
-			
-			#for delaying the calls on the API
-			sleep 2
+
+			#for delaying the calls on the failed attempts
+			sleep 1
 		fi
 	done
+
+	if [ "$success" = false ]; then
+		echo "Failed to fetch data for $p after 3 attempts." >> error_log.txt
+		echo "skipping $p."
+	fi
 	
+	#to avoid hitting the API rate limits
+	sleep 2
 done
