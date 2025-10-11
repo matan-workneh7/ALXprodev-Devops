@@ -3,13 +3,24 @@
 mkdir -p pokemon_data
 
 pokemons=("bulbasaur" "ivysaur" "venusaur" "charmander" "charmeleon")
- 
 
 for p in "${pokemons[@]}"; do
 	echo "Fetching data for $p..."
-	curl -s "https://pokeapi.co/api/v2/pokemon/$p" -o "pokemon_data/$p.json"
-	echo "Saved data to pokemon_data/$p.json"
+
+	success=False
 	
-	#for delaying the calls on the API
-	sleep 2
+	for attempt in {1..3}; do
+		status=$(curl -s -w"%{http_code}" -o "pokemon_data/$p.json" "https://pokeapi.co/api/v2/pokemon/$p")
+		if ["$status" -eq 200]; then
+			success=true
+			echo "Saved data to pokemon_data/$p.json"
+			break
+		else
+			echo "Attempt $attempt failed with status code $status. Retrying..."
+			
+			#for delaying the calls on the API
+			sleep 2
+		fi
+	done
+	
 done
