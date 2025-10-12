@@ -4,3 +4,14 @@
 mkdir -p pokemon_data
 
 DIR="pokemon_data"
+
+#Save the list of names to the variable
+pokemons=("bulbasaur" "ivysaur" "venusaur" "charmander" "charmeleon")
+
+echo "Starting the parallel data..."
+
+for p in "${pokemons[@]}"; do
+	{
+	echo "fetching data for $p..."
+	response=$(curl -s -w "%{http_code}" -o "$DIR/$p.json" "https://pokeapi.co/api/v2/pokemon/$p")
+	}&
