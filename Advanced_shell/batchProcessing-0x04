@@ -13,10 +13,19 @@ echo "Starting the parallel data..."
 for p in "${pokemons[@]}"; do
 	{
 	echo "fetching data for $p..."
-	response=$(curl -s -w "%{http_code}" -o "$DIR/$p.json" "https://pokeapi.co/api/v2/pokemon/$p")	
+	response=$(curl -s -w "%{http_code}" -o "$DIR/$p.json" "https://pokeapi.co/api/v2/pokemon/$p")
+
+	if ["$response" -eq 200 ]; then
+		echo "saved the data to $DIR/$p.json"
+	else
+		echo "failed to fetch data for $p with status code $response" >> error_log.txt
+		echo "skipping $p."
+	fi
+	#to avoid hitting the API rate limits
+	sleep 2
+
 	}&
 done
 
 wait
 echo "Data fetching completed."
-echo "Data saved in the $DIR directory."
