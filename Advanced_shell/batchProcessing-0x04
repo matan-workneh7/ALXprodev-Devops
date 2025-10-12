@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#We create the directory for it
+mkdir -p pokemon_data
+
+DIR="pokemon_data"
