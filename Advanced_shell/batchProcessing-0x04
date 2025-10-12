@@ -13,5 +13,10 @@ echo "Starting the parallel data..."
 for p in "${pokemons[@]}"; do
 	{
 	echo "fetching data for $p..."
-	response=$(curl -s -w "%{http_code}" -o "$DIR/$p.json" "https://pokeapi.co/api/v2/pokemon/$p")
+	response=$(curl -s -w "%{http_code}" -o "$DIR/$p.json" "https://pokeapi.co/api/v2/pokemon/$p")	
 	}&
+done
+
+wait
+echo "Data fetching completed."
+echo "Data saved in the $DIR directory."
