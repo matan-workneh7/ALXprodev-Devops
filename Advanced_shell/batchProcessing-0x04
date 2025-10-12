@@ -27,5 +27,17 @@ for p in "${pokemons[@]}"; do
 	}&
 done
 
+echo "Currently running background jobs..."
+
+jobs
+
+# Wait for all to finish
 wait
+
+# Check if any job is still hanging (no use for it since it doesnt have time logic)
+if [ "$(jobs -r | wc -l)" -gt 0 ]; then
+  echo "Some background jobs are still running — killing them..."
+  kill $(jobs -p)
+fi
+
 echo "Data fetching completed."
