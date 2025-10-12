@@ -10,21 +10,18 @@ pokemons=("bulbasaur" "ivysaur" "venusaur" "charmander" "charmeleon")
 
 echo "Starting the parallel data..."
 
-for p in "${pokemons[@]}"; do
-	{
+fetch_pokemon() {
+	local p="$1"
 	echo "fetching data for $p..."
 	response=$(curl -s -w"%{http_code}" -o "$DIR/$p.json" "https://pokeapi.co/api/v2/pokemon/$p")
 
 	if [ "$response" -eq 200 ]; then
 		echo "saved the data to $DIR/$p.json"
-	else
-		echo "failed to fetch data for $p with status code $response" >> error_log.txt
-		echo "skipping $p."
 	fi
-	#to avoid hitting the API rate limits
-	sleep 2
+}
 
-	}&
+for p in "${pokemons[@]}"; do
+	fetch_pokemon "$p" &
 done
 
 echo "Currently running background jobs..."
