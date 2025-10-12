@@ -15,7 +15,7 @@ for p in "${pokemons[@]}"; do
 	echo "fetching data for $p..."
 	response=$(curl -s -w"%{http_code}" -o "$DIR/$p.json" "https://pokeapi.co/api/v2/pokemon/$p")
 
-	if ["$response" -eq 200 ]; then
+	if [ "$response" -eq 200 ]; then
 		echo "saved the data to $DIR/$p.json"
 	else
 		echo "failed to fetch data for $p with status code $response" >> error_log.txt

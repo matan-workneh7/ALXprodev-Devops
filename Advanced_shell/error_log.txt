@@ -3,3 +3,8 @@ failed to fetch data for bulbasaur with status code 200
 failed to fetch data for charmander with status code 200
 failed to fetch data for ivysaur with status code 200
 failed to fetch data for charmeleon with status code 200
+failed to fetch data for ivysaur with status code 200
+failed to fetch data for charmander with status code 200
+failed to fetch data for venusaur with status code 200
+failed to fetch data for bulbasaur with status code 200
+failed to fetch data for charmeleon with status code 200
